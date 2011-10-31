@@ -1,16 +1,8 @@
 #!/usr/bin/env ruby
 require 'rubygems'
 require "daemons"
-require 'yaml'
-require 'erb'
-require 'daemons'
+require "daemons/rails/config"
 
-options = YAML.load(
-  ERB.new(
-    IO.read(
-      File.dirname(__FILE__) + "/../../config/daemons.yml"
-  )).result).each_with_object({}) { |pair, hash| hash[pair[0].to_sym] = pair[1] }
-    
-options[:dir_mode] = options[:dir_mode].to_sym
+config = Daemons::Rails::Config.new("<%= file_name %>", File.dirname(__FILE__) + "/../../config/")
 
-Daemons.run File.dirname(__FILE__) + "/<%= file_name %>.rb", options
+Daemons.run File.dirname(__FILE__) + "/<%= file_name %>.rb", config

@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-require File.expand_path('../lib/daemons_rails/version', __FILE__)
+require File.expand_path('../lib/daemons/rails/version', __FILE__)
 
 Gem::Specification.new do |gem|
   gem.authors       = ["mirasrael"]
@@ -13,7 +13,7 @@ Gem::Specification.new do |gem|
   gem.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   gem.name          = "daemons-rails"
   gem.require_paths = ["lib"]
-  gem.version       = DaemonsRails::VERSION
+  gem.version       = Daemons::Rails::VERSION
 
   gem.add_dependency 'rails', '~>3.0'
   gem.add_dependency 'daemons'
