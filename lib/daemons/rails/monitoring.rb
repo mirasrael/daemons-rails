@@ -16,8 +16,9 @@ module Daemons
         daemons_directory.each_file_name do |file|
           if file =~ /.*\/(\w+)_ctl\.rb/
             app_name = $1
-            group = Daemons::ApplicationGroup.new(app_name, Daemons::Rails::Config[app_name])
-            app = group.setup.first
+            app_config = Daemons::Rails::Config.new(app_name, Rails.root)
+            group = Daemons::ApplicationGroup.new(app_name, app_config.to_hash)
+            app = group.find_applications(group.pidfile_dir).first
             statuses[app_name] = app && app.running? ? :running : :not_exists
           end
         end

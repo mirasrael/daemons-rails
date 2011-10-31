@@ -1,2 +1,5 @@
 #!/usr/bin/env ruby
-Dir[File.dirname(__FILE__) + "/../lib/daemons/*_ctl"].each {|f| `#{f} #{ARGV.first}`}
+results = []
+Dir[File.dirname(__FILE__) + "/../lib/daemons/*_ctl"].each {|f| results << `#{f} #{ARGV.first}`}
+results.delete_if { |result| result.nil? || result.empty? }
+puts results.join("\n") unless results.empty?

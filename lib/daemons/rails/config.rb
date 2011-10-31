@@ -3,17 +3,27 @@ require 'erb'
 
 module Daemons
   module Rails
-    class Config < Hash
-      def new(app_name, configs_path = Rails.root.join("config"))
-        config_path = File.join(configs_path, "#{app_name}-daemon.yml")
-        config_path = File.join(configs_path, "daemons.yml") unless File.exists?(config_path)
+    class Config
+      def initialize(app_name, root_path)
+        @options = {}
+        config_path = File.join(root_path, "config", "#{app_name}-daemon.yml")
+        config_path = File.join(root_path, "config", "daemons.yml") unless File.exists?(config_path)
         options = YAML.load(ERB.new(IO.read(config_path)).result)
-        options.each { |key, value| self[key.to_sym] = value }
-        self[:dir_mode] = self[:dir_mode].to_sym
+        options.each { |key, value| @options[key.to_sym] = value }
+        @options[:dir_mode] = @options[:dir_mode].to_sym
+        @options[:script] ||= File.join(root_path, "lib", "daemons", "#{app_name}.rb")
       end
 
-      def self.[](app_name)
-        new(app_name)
+      def [](key)
+        @options[key]
+      end
+
+      def []=(key, value)
+        @options[key] = value
+      end
+
+      def to_hash
+        @options
       end
     end
   end
