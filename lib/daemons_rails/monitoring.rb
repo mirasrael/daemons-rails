@@ -1,4 +1,4 @@
-module Daemons
+module DaemonsRails
   class Monitoring
     def self.controls_directory=(value)
       @controls_directory = value

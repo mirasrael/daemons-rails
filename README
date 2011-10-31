@@ -1,14 +1,20 @@
-Daemon Generator
+Daemons Rails support (based on http://github.com/dougal/daemon_generator)
 ================
 
-To get yourself rolling:
-> sudo gem install daemons
-> ./script/generate daemon <name>
+To get it work just add dependency to this gem in your Gemfile.
 
-Then insert your code in the lib/daemons/<name>.rb stub. All pid's and logs will live in the normal log/ folder.  This helps to make things Capistrano friendly.
+== GENERATOR ==
+
+rails generate daemon <name>
+
+Then insert your code in the lib/daemons/<name>.rb stub. All pids and logs will live in the normal log/ folder. This helps to make things Capistrano friendly.
+
+== CONTROL ==
 
 Individual control script:
-> ./lib/daemons/<name>_ctl [start|stop|restart]
+> ./lib/daemons/<name>_ctl [start|stop|restart|status]
+> rake daemon:<name> [start|stop|restart|status]
 
-App-wide control script (I add this to my capistrano recipe's after_restart task):
+App-wide control script:
 > ./script/daemons [start|stop|restart]
+> rake daemons [start|stop|restart|status]
