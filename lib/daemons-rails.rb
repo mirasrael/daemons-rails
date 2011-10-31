@@ -1,7 +1,7 @@
 require "rails"
 
 module Daemons
-  class Railtie < Rails::Railtie
+  class Railtie < ::Rails::Railtie
     generators do
       require "generators/daemon_generator.rb"
     end
