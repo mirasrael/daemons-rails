@@ -1,3 +1,5 @@
+require "rails"
+
 module Daemons
   class Railtie < Rails::Railtie
     generators do
