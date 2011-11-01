@@ -8,21 +8,36 @@ module Daemons
       end
 
       def self.daemons_directory
-        @daemons_directory ||= Rails.root.join('lib', 'daemons')
+        @daemons_directory ||= ::Rails.root.join('lib', 'daemons')
+      end
+
+      def self.application(app_name)
+        group(app_name).applications.first
+      end
+
+      # We do not cache group to be sure we have actual information about running applications
+      def self.group(app_name)
+        app_config = Daemons::Rails::Config.new(app_name, ::Rails.root)
+        group = Daemons::ApplicationGroup.new("#{app_name}.rb", app_config.to_hash)
+        group.setup
+        group
+      end
+
+      def self.groups
+        groups = []
+        daemons_directory.each_entry do |file|
+          if !file.directory? && file.basename.to_s =~ /(\w+)_ctl/
+            groups << group($1)
+          end
+        end
+        groups
       end
 
       def self.status
-        statuses = {}
-        daemons_directory.each_file_name do |file|
-          if file =~ /.*\/(\w+)_ctl\.rb/
-            app_name = $1
-            app_config = Daemons::Rails::Config.new(app_name, Rails.root)
-            group = Daemons::ApplicationGroup.new(app_name, app_config.to_hash)
-            app = group.find_applications(group.pidfile_dir).first
-            statuses[app_name] = app && app.running? ? :running : :not_exists
-          end
+        groups.each_with_object({}) do |group, statuses|
+          app = group.applications.first
+          statuses[group.app_name.sub(/\.rb$/, "")] = app && app.running? ? :running : :not_exists
         end
-        statuses
       end
     end
   end
