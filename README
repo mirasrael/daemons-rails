@@ -9,12 +9,16 @@ rails generate daemon <name>
 
 Then insert your code in the lib/daemons/<name>.rb stub. All pids and logs will live in the normal log/ folder. This helps to make things Capistrano friendly.
 
+== CHANGES ==
+
+0.0.3 - added rake for running script without daemonization (rake daemon:<name>)
+
 == CONTROL ==
 
 Individual control script:
 > ./lib/daemons/<name>_ctl [start|stop|restart|status]
-> rake daemon:<name> [start|stop|restart|status]
+> rake daemon:<name>[:(start|stop|status)]
 
 App-wide control script:
 > ./script/daemons [start|stop|restart]
-> rake daemons [start|stop|restart|status]
+> rake daemons:(start|stop|status)
