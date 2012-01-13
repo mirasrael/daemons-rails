@@ -1,4 +1,6 @@
 require "daemons"
+require "daemons/rails/config"
+require "daemons/rails/controller"
 
 module Daemons
   module Rails
@@ -11,33 +13,24 @@ module Daemons
         @daemons_directory ||= ::Rails.root.join('lib', 'daemons')
       end
 
-      def self.application(app_name)
-        group(app_name).applications.first
+      def self.controller(app_name)
+        controllers.find { |controller| controller.app_name == app_name }
       end
 
-      # We do not cache group to be sure we have actual information about running applications
-      def self.group(app_name)
-        app_config = Daemons::Rails::Config.new(app_name, ::Rails.root)
-        group = Daemons::ApplicationGroup.new("#{app_name}.rb", app_config.to_hash)
-        group.setup
-        group
+      def self.controllers
+        Pathname.glob(daemons_directory.join('*_ctl')).map { |path| Daemons::Rails::Controller.new(path) }
       end
 
-      def self.groups
-        groups = []
-        daemons_directory.each_entry do |file|
-          if !file.directory? && file.basename.to_s =~ /(\w+)_ctl/
-            groups << group($1)
-          end
-        end
-        groups
+      def self.statuses
+        controllers.each_with_object({}) { |controller, statuses| statuses[controller.app_name] = controller.status }
       end
 
-      def self.status
-        groups.each_with_object({}) do |group, statuses|
-          app = group.applications.first
-          statuses[group.app_name.sub(/\.rb$/, "")] = app && app.running? ? :running : :not_exists
-        end
+      def self.start(app_name)
+        controller(app_name).start
+      end
+
+      def self.stop(app_name)
+        controller(app_name).stop
       end
     end
   end
