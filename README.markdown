@@ -7,7 +7,7 @@ To get it work just add dependency to this gem in your Gemfile.
 
     rails generate daemon <name>
 
-Then insert your code in the lib/daemons/<name>.rb stub. All pids and logs will live in the normal log/ folder. This helps to make things Capistrano friendly.
+Then insert your code in the lib/daemons/\<name\>.rb stub. All pids and logs will live in the normal log/ folder. This helps to make things Capistrano friendly.
 
 ## CONTROL ##
 
@@ -45,5 +45,5 @@ App-wide control script:
 
 ## CHANGES ##
 
-* 1.0.0 - changed api for Daemons::Rails::Monitoring, fixed path in template for script, improved documentation, added RSpec        
-* 0.0.3 - added rake for running script without daemonization (rake daemon:<name>)
+* 1.0.0 - changed api for Daemons::Rails::Monitoring, fixed path in template for script, improved documentation, added RSpec
+* 0.0.3 - added rake for running script without daemonization (rake daemon:\<name\>)
