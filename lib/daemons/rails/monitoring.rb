@@ -1,4 +1,5 @@
 require "daemons"
+require "daemons/rails"
 require "daemons/rails/config"
 require "daemons/rails/controller"
 
@@ -10,7 +11,7 @@ module Daemons
       end
 
       def self.daemons_directory
-        @daemons_directory ||= ::Rails.root.join('lib', 'daemons')
+        @daemons_directory || Daemons::Rails.configuration.daemons_directory
       end
 
       def self.controller(app_name)

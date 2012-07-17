@@ -2,7 +2,9 @@
 require 'rubygems'
 require "daemons"
 require "daemons/rails/config"
+require "daemons/rails"
 
-config = Daemons::Rails::Config.new("<%= file_name %>", File.dirname(__FILE__) + "/../../")
+root = Daemons::Rails.configuration.detect_root
+config = Daemons::Rails::Config.new("<%= file_name %>", root, Pathname.new(File.expand_path(__FILE__)).parent.relative_path_from(root))
 
 Daemons.run File.dirname(__FILE__) + "/<%= file_name %>.rb", config.to_hash

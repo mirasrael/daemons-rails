@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 results = []
-Dir[File.dirname(__FILE__) + "/../lib/daemons/*_ctl"].each {|f| results << `#{f} #{ARGV.first}`}
+Dir[File.dirname(__FILE__) + "/*_ctl"].each {|f| results << `#{f} #{ARGV.first}`}
 results.delete_if { |result| result.nil? || result.empty? }
 puts results.join unless results.empty?

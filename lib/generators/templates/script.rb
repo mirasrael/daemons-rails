@@ -3,7 +3,9 @@
 # You might want to change this
 ENV["RAILS_ENV"] ||= "production"
 
-require File.expand_path(File.join(File.dirname(__FILE__), "..", "..", "config", "environment"))
+root = File.expand_path(File.dirname(__FILE__))
+root = File.dirname(root) until File.exists?(File.join(root, 'config'))
+require File.join(root, "config", "environment")
 
 $running = true
 Signal.trap("TERM") do 
