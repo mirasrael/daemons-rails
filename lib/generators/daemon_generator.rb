@@ -6,7 +6,7 @@ class DaemonGenerator < Rails::Generators::NamedBase
   argument :daemon_name, :type => :string, :default => "application"
 
   def generate_daemon
-    daemons_dir = Daemons::Rails.configuration.daemons_directory.relative_path_from(Rails.root)
+    daemons_dir = Daemons::Rails.configuration.daemons_directory
 
     unless File.exists?(Rails.root.join(daemons_dir, 'daemons'))
       copy_file "daemons", daemons_dir.join('daemons')

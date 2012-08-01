@@ -3,7 +3,7 @@ require 'rake'
 desc "Show status of daemons"
 task :daemons => "daemons:status"
 
-daemons_dir = Daemons::Rails.configuration.daemons_directory.relative_path_from(Rails.root)
+daemons_dir = Daemons::Rails.configuration.daemons_directory
 
 namespace :daemons do
   %w[start stop status].each do |arg|

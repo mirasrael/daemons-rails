@@ -4,7 +4,6 @@ require "daemons"
 require "daemons/rails/config"
 require "daemons/rails"
 
-root = Daemons::Rails.configuration.detect_root
-config = Daemons::Rails::Config.new("<%= file_name %>", root, Pathname.new(File.expand_path(__FILE__)).parent.relative_path_from(root))
+config = Daemons::Rails::Config.new("<%= file_name %>", Daemons::Rails.configuration.root, Daemons::Rails.configuration.daemons_directory)
 
 Daemons.run File.dirname(__FILE__) + "/<%= file_name %>.rb", config.to_hash

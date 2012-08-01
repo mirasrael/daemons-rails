@@ -4,18 +4,49 @@ require "daemons/rails/monitoring"
 require "daemons/rails"
 
 describe Daemons::Rails::Configuration do
-  around :each do |example|
-    Daemons::Rails.configure do |c|
-      c.daemons_directory = Rails.root.join('daemons')
+  subject { Daemons::Rails.configuration }
+
+  describe "Default configuration" do
+    describe "rails env" do
+      its(:root) { should == Rails.root }
+      its(:daemons_path) { should == Rails.root.join('lib', 'daemons') }
+      its(:daemons_directory) { should == Pathname.new('lib').join('daemons') }
     end
-    example.run
-    Daemons::Rails.configure do |c|
-      c.daemons_directory = nil
+
+    describe "no rails" do
+      before :all do
+        Dir.chdir Rails.root
+        Object.const_set :Rails_, Rails
+        Object.send :remove_const, :Rails
+      end
+      after :all do
+        Object.const_set :Rails, Rails_
+        Object.send :remove_const, :Rails_
+        Dir.chdir Rails.root.parent.parent
+      end
+      its(:root) { should == Rails_.root }
+      its(:daemons_path) { should == Rails_.root.join('lib', 'daemons') }
+      its(:daemons_directory) { should == Pathname.new('lib').join('daemons') }
     end
   end
 
-  it "should override daemons directory" do
-    Daemons::Rails::Monitoring.daemons_directory.should == Rails.root.join('daemons')
-    Daemons::Rails::Monitoring.controllers.map(&:app_name).should == %w(test2.rb)
+  describe "Overridden daemons directory" do
+    around :each do |example|
+      Daemons::Rails.configure do |c|
+        c.daemons_path = Rails.root.join('daemons')
+      end
+      example.run
+      Daemons::Rails.configure do |c|
+        c.daemons_path = nil
+      end
+    end
+
+    its(:daemons_path) { should == Rails.root.join('daemons') }
+    its(:daemons_directory) { should == Pathname.new('daemons') }
+
+    it "should override daemons directory" do
+      Daemons::Rails::Monitoring.daemons_directory.should == Rails.root.join('daemons')
+      Daemons::Rails::Monitoring.controllers.map(&:app_name).should == %w(test2.rb)
+    end
   end
 end
