@@ -42,6 +42,22 @@ App-wide control script:
     controller.start # => starts daemon
     controller.stop # => stops daemon
     controller.status # => :not_exists or :running
+    
+## CONFIGURATION ##
+
+You can set default settings for your daemons into config/daemons.yml file. Full list of options you can get from documentation to Daemons.daemonize method (http://daemons.rubyforge.org/classes/Daemons.html#M000007). Also it possible to set individual daemon options using file config/\<daemon_name\>-daemon.yml.
+If you want to use directory other than default lib/daemons then you should add to application initialization block following lines:
+    
+    class MyApp < Rails::Application
+        ...
+        Daemons::Rails.configure do |c|
+            c.daemons_path = Rails.root.join("new_daemons_path")
+        end
+        ...
+    end
+    
+If you change your mind, you can easily move content of this directory to other place and change config. 
+Notice: this feature available only from version 1.1 and old generated daemons can't be free moved, because uses hard-coded path to lib/daemons. So, you can generate daemons with same names and then move client code to generated templates.
 
 ## CHANGES ##
 
