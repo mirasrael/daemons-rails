@@ -3,6 +3,10 @@ Daemons Rails support (based on http://github.com/dougal/daemon_generator)
 
 To get it work just add dependency to this gem in your Gemfile.
 
+## NOTES ##
+
+If you switching from version before 1.1 you may need to move script/daemons file to lib/daemons directory.
+
 ## GENERATOR ##
 
     rails generate daemon <name>
