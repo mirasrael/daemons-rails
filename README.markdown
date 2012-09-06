@@ -5,7 +5,7 @@ To get it work just add dependency to this gem in your Gemfile.
 
 ## NOTES ##
 
-If you switching from version before 1.1 you may need to move script/daemons file to lib/daemons directory.
+**If you are switching from earlier version to 1.1 you may need to move script/daemons file to lib/daemons directory.**
 
 ## GENERATOR ##
 
@@ -29,7 +29,7 @@ Examples:
 
 App-wide control script:
   
-    ./script/daemons [start|stop|restart]
+    ./lib/daemons/daemons [start|stop|restart|status]
     rake daemons:(start|stop|status)
 
 ## MONITORING API ##
