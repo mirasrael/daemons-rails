@@ -45,7 +45,7 @@ App-wide control script:
     controller.app_name # => test.rb
     controller.start # => starts daemon
     controller.stop # => stops daemon
-    controller.status # => :not_exists or :running
+    controller.status # => :not_exists or :running    
     
 ## CONFIGURATION ##
 
@@ -62,6 +62,19 @@ If you want to use directory other than default lib/daemons then you should add 
     
 If you change your mind, you can easily move content of this directory to other place and change config. 
 Notice: this feature available only from version 1.1 and old generated daemons can't be free moved, because uses hard-coded path to lib/daemons. So, you can generate daemons with same names and then move client code to generated templates.
+
+## USING MULTIPLE DAEMON SETS ##
+
+At this moment it is not supported at generators and rake tasks levels, but you can generate daemon to default location and move to different folder (you should also copy *daemons* script to same directory). Then you will be able to operate with them using following scripts:
+
+    other/daemons/location/daemons [start|stop|restart|status]
+    other/daemons/location/<daemon_name>_ctl [start|stop|restart|status]
+    
+To access the daemons with Monitoring API you can use configured instance of *Daemons::Rails::Monitoring*:
+    
+    Daemons::Rails::Monitoring.new("other/daemons/location")
+    
+and same set of methods. Effectively, *Daemons::Rails::Monitoring* just delegates all method calls to *Daemons::Rails::Monitoring.default* initialized with configured daemons path.
 
 ## CHANGES ##
 
