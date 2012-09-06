@@ -65,6 +65,6 @@ Notice: this feature available only from version 1.1 and old generated daemons c
 
 ## CHANGES ##
 
-* 1.1.0 - supported custom directory for daemons
+* 1.1.0 - supported custom directory for daemons, support multiple daemons directories
 * 1.0.0 - changed api for Daemons::Rails::Monitoring, fixed path in template for script, improved documentation, added RSpec
 * 0.0.3 - added rake for running script without daemonization (rake daemon:\<name\>)

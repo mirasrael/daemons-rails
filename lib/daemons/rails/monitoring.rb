@@ -7,24 +7,32 @@ require "active_support/core_ext/module/delegation.rb"
 module Daemons
   module Rails
     class Monitoring
-      attr_accessor :daemons_directory
-
       def self.default
         @default ||= self.new
       end
 
-      def initialize(daemons_directory = Daemons::Rails.configuration.daemons_path)
-        @daemons_directory = daemons_directory
+      def initialize(daemons_path = Daemons::Rails.configuration.daemons_path)
+        @daemons_path = daemons_path
       end
 
-      singleton_class.delegate :daemons_directory=, :daemons_directory, :controller, :controllers, :statuses, :start, :stop, :to => :default
+      singleton_class.delegate :daemons_path=, :daemons_path, :controller, :controllers, :statuses, :start, :stop, :to => :default
 
-      def daemons_directory=(value)
-        self.default.daemons_directory = value
+      # @deprecate use Daemons::Rails::Monitoring#daemons_path=
+      def self.daemons_directory=(value)
+        self.daemons_path = value
       end
 
-      def daemons_directory
-        @daemons_directory || Daemons::Rails.configuration.daemons_path
+      # @deprecate use Daemons::Rails::Monitoring#daemons_path
+      def self.daemons_directory
+        self.daemons_path
+      end
+
+      def daemons_path=(value)
+        @daemons_path = value
+      end
+
+      def daemons_path
+        @daemons_path || Daemons::Rails.configuration.daemons_path
       end
 
       def controller(app_name)
@@ -32,7 +40,7 @@ module Daemons
       end
 
       def controllers
-        Pathname.glob(daemons_directory.join('*_ctl')).map { |path| Daemons::Rails::Controller.new(path) }
+        Pathname.glob(daemons_path.join('*_ctl')).map { |path| Daemons::Rails::Controller.new(path) }
       end
 
       def statuses
