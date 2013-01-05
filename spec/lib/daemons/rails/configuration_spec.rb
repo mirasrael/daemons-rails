@@ -10,7 +10,6 @@ describe Daemons::Rails::Configuration do
     describe "rails env" do
       its(:root) { should == Rails.root }
       its(:daemons_path) { should == Rails.root.join('lib', 'daemons') }
-      its(:daemons_path) { should == Pathname.new('lib').join('daemons') }
     end
 
     describe "no rails" do
@@ -26,7 +25,6 @@ describe Daemons::Rails::Configuration do
       end
       its(:root) { should == Rails_.root }
       its(:daemons_path) { should == Rails_.root.join('lib', 'daemons') }
-      its(:daemons_path) { should == Pathname.new('lib').join('daemons') }
     end
   end
 
@@ -42,7 +40,6 @@ describe Daemons::Rails::Configuration do
     end
 
     its(:daemons_path) { should == Rails.root.join('daemons') }
-    its(:daemons_path) { should == Pathname.new('daemons') }
 
     it "should override daemons directory" do
       Daemons::Rails::Monitoring.daemons_path.should == Rails.root.join('daemons')
