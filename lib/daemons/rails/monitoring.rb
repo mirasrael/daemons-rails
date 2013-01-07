@@ -11,7 +11,7 @@ module Daemons
         @default ||= self.new
       end
 
-      def initialize(daemons_path = Daemons::Rails.configuration.daemons_path)
+      def initialize(daemons_path = nil)
         @daemons_path = daemons_path
       end
 
