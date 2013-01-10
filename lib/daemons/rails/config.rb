@@ -1,5 +1,6 @@
 require 'yaml'
 require 'erb'
+require 'pathname'
 
 require 'daemons/rails'
 

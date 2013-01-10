@@ -1,3 +1,6 @@
+require 'pathname'
+require 'fileutils'
+
 module Daemons
   module Rails
     class Configuration
