@@ -1,12 +1,16 @@
 require "daemons"
+require "pathname"
+require "forwardable"
 require "daemons/rails"
 require "daemons/rails/config"
 require "daemons/rails/controller"
-require "active_support/core_ext/module/delegation.rb"
 
 module Daemons
   module Rails
     class Monitoring
+      singleton_class.extend Forwardable
+      singleton_class.def_delegators :default, :daemons_path=, :daemons_path, :controller, :controllers, :statuses, :start, :stop
+
       def self.default
         @default ||= self.new
       end
@@ -14,8 +18,6 @@ module Daemons
       def initialize(daemons_path = nil)
         @daemons_path = daemons_path
       end
-
-      singleton_class.delegate :daemons_path=, :daemons_path, :controller, :controllers, :statuses, :start, :stop, :to => :default
 
       # @deprecate use Daemons::Rails::Monitoring#daemons_path=
       def self.daemons_directory=(value)
