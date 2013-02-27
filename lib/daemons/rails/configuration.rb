@@ -5,7 +5,9 @@ module Daemons
   module Rails
     class Configuration
       def detect_root
-        if defined?(::Rails)
+        if ENV["DAEMONS_ROOT"]
+          Pathname.new(ENV["DAEMONS_ROOT"])
+        elsif defined?(::Rails)
           ::Rails.root
         else
           root = Pathname.new(FileUtils.pwd)

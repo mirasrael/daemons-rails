@@ -9,7 +9,7 @@ module Daemons
       end
 
       def run(command)
-        `#{path} #{command}`
+        `cd #{Daemons::Rails.configuration.root} && #{path} #{command}`
       end
 
       def start
