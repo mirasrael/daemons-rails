@@ -5,11 +5,11 @@ module Daemons
 
       def initialize(controller_path)
         @path = controller_path
-        @app_name = "#{controller_path.basename.to_s[0..-'_ctrl'.length]}.rb"
+        @app_name = "#{controller_path.basename.to_s[0...-'_ctl'.length]}.rb"
       end
 
       def run(command)
-        `#{path} #{command}`
+        `cd #{Daemons::Rails.configuration.root} && #{path} #{command}`
       end
 
       def start
