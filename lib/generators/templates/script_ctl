@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
 require 'rubygems'
-require "daemons"
-require "daemons/rails/config"
+require 'daemons/rails/config'
 
 config = Daemons::Rails::Config.for_controller(File.expand_path(__FILE__))
-Daemons.run config[:script], config.to_hash
+Daemons::Rails.run config[:script], config.to_hash

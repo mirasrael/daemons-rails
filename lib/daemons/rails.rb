@@ -1,4 +1,5 @@
-require "daemons/rails/configuration"
+require 'daemons'
+require 'daemons/rails/configuration'
 
 module Daemons
   module Rails
@@ -9,6 +10,10 @@ module Daemons
 
     def self.configure
       yield configuration
+    end
+
+    def self.run(*args)
+      Daemons.run(*args)
     end
   end
 end
