@@ -5,8 +5,8 @@ To get it work just add dependency to this gem in your Gemfile.
 
 ## NOTES ##
 
-**If you are switching from earlier version to 1.1 you may need to move script/daemons file to lib/daemons directory.**
-**If you switched from earlier version to 1.2 its recommended to change *Daemons.run* to *Daemons::Rails.run* in your \*_ctl files**
+- **If you switched from earlier version to 1.2 its recommended to change `Daemons.run` to `Daemons::Rails.run` in your `*_ctl` files**
+- **If you switched from earlier version to 1.1 you may need to move `script/daemons` file to `lib/daemons` directory.**
 
 ## GENERATOR ##
 
