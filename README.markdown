@@ -6,6 +6,7 @@ To get it work just add dependency to this gem in your Gemfile.
 ## NOTES ##
 
 **If you are switching from earlier version to 1.1 you may need to move script/daemons file to lib/daemons directory.**
+**If you switched from earlier version to 1.2 its recommended to change *Daemons.run* to *Daemons::Rails.run* in your \*_ctl files**
 
 ## GENERATOR ##
 
@@ -78,6 +79,7 @@ and same set of methods. Effectively, *Daemons::Rails::Monitoring* just delegate
 
 ## CHANGES ##
 
+* 1.2.0 - development dependency on Rails bumped to support Rails 4 (dmilisic). Removed direct dependency on Daemons gem from generated files (in preparation for more daemonization providers)	
 * 1.1.2 - fix script template to load environment within Rails.root directory. It takes no effect on already generated scripts.
 * 1.1.1 - fix dependencies, clean-up specs
 * 1.1.0 - supported custom directory for daemons, support multiple daemons directories
