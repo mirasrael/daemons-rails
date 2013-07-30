@@ -85,3 +85,8 @@ and same set of methods. Effectively, *Daemons::Rails::Monitoring* just delegate
 * 1.1.0 - supported custom directory for daemons, support multiple daemons directories
 * 1.0.0 - changed api for Daemons::Rails::Monitoring, fixed path in template for script, improved documentation, added RSpec
 * 0.0.3 - added rake for running script without daemonization (rake daemon:\<name\>)
+
+## License
+
+You free to choose kind of license to use:
+[MIT License](http://www.opensource.org/licenses/MIT) or [GPL-2 License](http://www.gnu.org/licenses/gpl-2.0.html)
