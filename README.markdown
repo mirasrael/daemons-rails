@@ -88,5 +88,5 @@ and same set of methods. Effectively, *Daemons::Rails::Monitoring* just delegate
 
 ## License
 
-You free to choose kind of license to use:
+You are free to choose kind of license to use:
 [MIT License](http://www.opensource.org/licenses/MIT) or [GPL-2 License](http://www.gnu.org/licenses/gpl-2.0.html)
