@@ -7,7 +7,7 @@ Gem::Specification.new do |gem|
   gem.description   = %q{daemonization support for Rails 3+}
   gem.summary       = %q{daemonization support for Rails 3+}
   gem.homepage      = ""
-  gem.license       = ['MIT', 'GPL-2']
+  gem.licenses      = %w(MIT GPL-2)
 
   gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   gem.files         = `git ls-files`.split("\n")
