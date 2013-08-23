@@ -25,7 +25,7 @@ namespace :daemon do
     end
 
     namespace app_name do
-      %w[start stop status].each do |arg|
+      %w[start stop restart status].each do |arg|
         desc "#{arg.capitalize} #{app_name} daemon."
         task :"#{arg}" do
           puts `#{controller} #{arg}`
