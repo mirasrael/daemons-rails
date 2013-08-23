@@ -19,13 +19,14 @@ Then insert your code in the lib/daemons/\<name\>.rb stub. All pids and logs wil
 Individual control script:
 
     ./lib/daemons/<name>_ctl [start|stop|restart|status]
-    rake daemon:<name>[:(start|stop|status)]
+    rake daemon:<name>[:(start|stop|restart|status)]
 
 Examples:
 
     rake daemon:test - runs lib/daemons/test.rb not daemonized
     rake daemon:test:start - start daemon using lib/daemons/test_ctl start
     rake daemon:test:stop - stop daemon using lib/daemons/test_ctl stop
+    rake daemon:test:restart - restart daemon using lib/daemons/test_ctl restart
     rake daemon:test:status - show running status for daemon using lib/daemons/test_ctl status
 
 App-wide control script:
@@ -79,6 +80,7 @@ and same set of methods. Effectively, *Daemons::Rails::Monitoring* just delegate
 
 ## CHANGES ##
 
+* 1.2.1 - add `rake daemon:<name>:restart` command
 * 1.2.0 - development dependency on Rails bumped to support Rails 4 (dmilisic). Removed direct dependency on Daemons gem from generated files (in preparation for more daemonization providers)	
 * 1.1.2 - fix script template to load environment within Rails.root directory. It takes no effect on already generated scripts.
 * 1.1.1 - fix dependencies, clean-up specs
