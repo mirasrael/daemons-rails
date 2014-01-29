@@ -14,10 +14,10 @@ Signal.trap("TERM") do
   $running = false
 end
 
-while($running) do
-  
+Rails.logger.auto_flushing = true if Rails.logger.respond_to?(:auto_flushing)
+
+while $running do
   # Replace this with your code
-  Rails.logger.auto_flushing = true
   Rails.logger.info "This daemon is still running at #{Time.now}.\n"
   
   sleep 10
