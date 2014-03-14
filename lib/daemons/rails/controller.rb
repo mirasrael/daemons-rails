@@ -8,12 +8,14 @@ module Daemons
         @app_name = "#{controller_path.basename.to_s[0...-'_ctl'.length]}.rb"
       end
 
-      def run(command)
-        `cd #{Daemons::Rails.configuration.root} && #{path} #{command}`
+      def run(command, argv={})
+        arguments = '-- '
+        argv.each {|key,value| arguments += "#{key} #{value} "}
+        `cd #{Daemons::Rails.configuration.root} && #{path} #{command} #{arguments unless argv.empty?}`
       end
 
-      def start
-        run('start')
+      def start(argv={})
+        run('start',argv)
       end
 
       def stop
