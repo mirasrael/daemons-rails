@@ -11,7 +11,7 @@ module Daemons
       def run(command, argv={})
         arguments = '-- '
         argv.each {|key,value| arguments += "#{key} #{value} "}
-        `cd #{Daemons::Rails.configuration.root} && #{path} #{command} #{arguments unless argv.empty?}`
+        `cd "#{Daemons::Rails.configuration.root}" && "#{path}" #{command} #{arguments unless argv.empty?}`
       end
 
       def start(argv={})
