@@ -1,4 +1,7 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
+# encoding: UTF-8
+
 results = []
 Dir[File.dirname(__FILE__) + "/*_ctl"].each {|f| results << `ruby #{f} #{ARGV.first}`}
 results.delete_if { |result| result.nil? || result.empty? }

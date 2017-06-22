@@ -1,4 +1,6 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
+# encoding: UTF-8
 
 # You might want to change this
 ENV["RAILS_ENV"] ||= "production"

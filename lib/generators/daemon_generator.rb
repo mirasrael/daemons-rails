@@ -1,3 +1,6 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+# encoding: UTF-8
 require 'rails/generators'
 require 'daemons/rails'
 

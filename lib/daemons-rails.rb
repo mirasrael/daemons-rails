@@ -1,3 +1,6 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+# encoding: UTF-8
 require 'rails'
 require 'daemons/rails/config'
 require 'daemons/rails/monitoring'
