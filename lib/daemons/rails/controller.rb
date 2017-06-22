@@ -23,31 +23,31 @@ module Daemons
       def start(argv = {})
         run('start', argv)
 
-        status
+      #  status
       end
 
       def stop(argv = {})
         run('stop', argv)
 
-        status
+      #  status
       end
 
       def reload(argv = {})
         run('reload', argv)
 
-        status
+      #  status
       end
 
       def zap(argv = {})
         run('zap', argv)
 
-        status
+      #  status
       end
 
       def restart(argv = {})
         run('restart', argv)
 
-        status
+      #  status
       end
 
       def status(argv = {})

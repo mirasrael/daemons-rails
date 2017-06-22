@@ -15,21 +15,21 @@ describe Daemons::Rails::Monitoring do
     describe "using controllers" do
       before :each do
         @controller = Daemons::Rails::Controller.new(Rails.root.join('lib', 'daemons', 'test_ctl'))
-        allow(Daemons::Rails::Monitoring).to receive(:controllers).and_return([@controller])
+        allow(subject).to receive(:controllers).and_return([@controller])
       end
 
       it "should return status for all controllers" do
-        allow(@controller).to receive(:run).with('status').and_return('test.rb: running [pid 10880]')
+        allow(@controller).to receive(:run).with('status', {}).and_return('test.rb: running [pid 10880]')
         expect(subject.statuses).to eq({'test.rb' => :running})
       end
 
       it "should start controller by name" do
-        allow(@controller).to receive(:run).with('start')
+        allow(@controller).to receive(:run).with('start', {})
         subject.start('test.rb')
       end
 
       it "should stop controller by name" do
-        allow(@controller).to receive(:run).with('stop')
+        allow(@controller).to receive(:run).with('stop', {})
         subject.stop('test.rb')
       end
     end
