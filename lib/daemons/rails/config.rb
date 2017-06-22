@@ -10,7 +10,7 @@ module Daemons
       def initialize(app_name, root_path, daemons_dir = File.join('lib', 'daemons'))
         @options = {}
         config_path = File.join(root_path, "config", "#{app_name}-daemon.yml")
-        config_path = File.join(root_path, "config", "daemons.yml") unless File.exists?(config_path)
+        config_path = File.join(root_path, "config", "daemons.yml") unless File.exist?(config_path)
         options = YAML.load(ERB.new(IO.read(config_path)).result)
         options.each { |key, value| @options[key.to_sym] = value }
         @options[:dir_mode] = @options[:dir_mode].to_sym

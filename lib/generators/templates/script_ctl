@@ -8,5 +8,5 @@ config = Daemons::Rails::Config.for_controller(File.expand_path(__FILE__))
 log_directory = config[:logdir].nil? ? "log" : File.expand_path(config[:logdir])
 config[:output_logfilename] = "#{log_directory)}/#{File.basename(__FILE__)}.rb.txt"
 config[:logfilename] = "#{log_directory)}/#{File.basename(__FILE__)}.rb.log"
-FileUtils.touch(config[:logfilename]) unless File.exists?(config[:logfilename])
+FileUtils.touch(config[:logfilename]) unless File.exist?(config[:logfilename])
 Daemons::Rails.run config[:script], config.to_hash

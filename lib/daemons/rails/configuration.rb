@@ -12,7 +12,7 @@ module Daemons
         else
           root = Pathname.new(FileUtils.pwd)
           root = root.parent unless root.directory?
-          root = root.parent until File.exists?(root.join('config.ru')) || root.root?
+          root = root.parent until File.exist?(root.join('config.ru')) || root.root?
           raise "Can't detect Rails application root" if root.root?
           root
         end
