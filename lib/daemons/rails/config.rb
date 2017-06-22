@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 # encoding: UTF-8
+# warn_indent: true
 require 'yaml'
 require 'erb'
 require 'pathname'
