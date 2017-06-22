@@ -15,7 +15,7 @@ Gem::Specification.new do |gem|
   gem.test_files                  = `git ls-files -- {test,spec,features}/*`.split("\n")
   gem.name                        = "daemons-rails"
   gem.require_paths               = ["lib"]
-  gem.version                     = Daemons::Rails::VERSION
+  gem.version                     = Daemons::Rails.gem_version
   gem.platform                    = Gem::Platform::RUBY
   gem.date                        = Date.today
   gem.required_ruby_version       = '>= 2.0'
@@ -29,9 +29,12 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'daemons'
   gem.add_dependency 'multi_json', '~>1.0'
 
-  gem.add_development_dependency 'rails', '>=3.0.0'
+  gem.add_development_dependency 'rails', '>=4.0.0'
   gem.add_development_dependency "rake"
-  gem.add_development_dependency 'rspec', '>=2.12'
+  gem.add_development_dependency 'rspec-rails', '~> 3.5', '>= 3.5'
+  gem.add_development_dependency 'mocha','~> 1.2', '>= 1.2'
+  gem.add_development_dependency 'rspec-its'
+  gem.add_development_dependency 'httpi'
 
   gem.add_development_dependency 'appraisal', '~> 2.1', '>= 2.1'
   gem.add_development_dependency 'simplecov', '~> 0.12', '>= 0.12'
