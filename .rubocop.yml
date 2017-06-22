@@ -2,7 +2,6 @@ AllCops:
   Exclude:
     - daemons-rails.gemspec
     - bin/**/*
-    - Guardfile
     - vendor/**/**
     - examples/**/**
     - spec/**/*
