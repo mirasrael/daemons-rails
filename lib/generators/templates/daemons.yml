@@ -1,6 +1,17 @@
 dir_mode: script
-dir: ../../log
+mode: exec
+dir: ../../log/pids
+logdir: ../../log
+shush: false
 multiple: false
 backtrace: true
 monitor: false
+monitor_interval: 60 # seconds
 ontop: false
+log_output: true
+keep_pid_files: true
+no_pidfiles: false
+force_kill_waittime: 60
+available_environments:
+  - development
+  - test
