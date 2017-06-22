@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+# encoding: UTF-8
+# warn_indent: true
+
+require 'rubygems'
+require 'daemons/rails'
+
+config = Daemons::Rails::Config.for_controller(File.expand_path(__FILE__))
+Daemons::Rails.run config[:script], config.to_hash

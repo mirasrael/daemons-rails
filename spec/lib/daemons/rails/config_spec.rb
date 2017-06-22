@@ -6,7 +6,7 @@ describe Daemons::Rails::Config do
     subject { Daemons::Rails::Config.for_controller(Rails.root.join('app', 'daemons', 'test_ctl').to_s) }
 
     it 'should init options' do
-      subject[:script].should == Rails.root.join('app', 'daemons', 'test.rb').to_s
+      expect(subject[:script]).to eq Rails.root.join('app', 'daemons', 'test.rb').to_s
     end
   end
 end

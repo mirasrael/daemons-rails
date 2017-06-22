@@ -1,18 +1,20 @@
-require 'pathname'
-require 'fileutils'
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+# encoding: UTF-8
 
+# warn_indent: true
 module Daemons
   module Rails
     class Configuration
       def detect_root
-        if ENV["DAEMONS_ROOT"]
-          Pathname.new(ENV["DAEMONS_ROOT"])
+        if ENV['DAEMONS_ROOT']
+          Pathname.new(ENV['DAEMONS_ROOT'])
         elsif defined?(::Rails)
           ::Rails.root
         else
           root = Pathname.new(FileUtils.pwd)
           root = root.parent unless root.directory?
-          root = root.parent until File.exists?(root.join('config.ru')) || root.root?
+          root = root.parent until File.exist?(root.join('config.ru')) || root.root?
           raise "Can't detect Rails application root" if root.root?
           root
         end

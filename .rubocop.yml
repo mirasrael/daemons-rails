@@ -1,0 +1,23 @@
+AllCops:
+  Exclude:
+    - daemons-rails.gemspec
+    - bin/**/*
+    - vendor/**/**
+    - examples/**/**
+    - spec/**/*
+    - Gemfile
+    - Rakefile
+
+  TargetRubyVersion: 2.4
+
+Documentation:
+  Enabled: true
+
+Encoding:
+  Enabled: true
+
+AccessModifierIndentation:
+  EnforcedStyle: outdent
+
+Style/FileName:
+  Enabled: true
