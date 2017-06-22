@@ -24,6 +24,7 @@ gemfile:
   - gemfiles/rails_5.0.2.gemfile
   - gemfiles/rails_5.1.0.rc1.gemfile
   - gemfiles/rails_5.1.0.rc2.gemfile
+  - gemfiles/rails_5.1.0.gemfile
   - gemfiles/rails_5.1.1.gemfile
   - gemfiles/rails_5.1.2.rc1.gemfile
 matrix:

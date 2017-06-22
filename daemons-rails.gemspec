@@ -29,17 +29,12 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'daemons'
   gem.add_dependency 'multi_json', '~>1.0'
 
-  gem.add_development_dependency 'rails', '>=4.0.0'
   gem.add_development_dependency "rake"
   gem.add_development_dependency 'rspec-rails', '~> 3.5', '>= 3.5'
-  gem.add_development_dependency 'mocha','~> 1.2', '>= 1.2'
-  gem.add_development_dependency 'rspec-its'
-  gem.add_development_dependency 'httpi'
 
   gem.add_development_dependency 'appraisal', '~> 2.1', '>= 2.1'
   gem.add_development_dependency 'simplecov', '~> 0.12', '>= 0.12'
   gem.add_development_dependency 'simplecov-summary', '~> 0.0.5', '>= 0.0.5'
-  gem.add_development_dependency 'coveralls', '~> 0.8', '>= 0.8.17'
   gem.add_development_dependency 'yard', '~> 0.8', '>= 0.8.7'
   gem.add_development_dependency 'inch', '~> 0.7', '>= 0.7.1'
 end
