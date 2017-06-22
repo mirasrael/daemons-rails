@@ -14,7 +14,7 @@ Documentation:
   Enabled: true
 
 Encoding:
-  Enabled: false
+  Enabled: true
 
 AccessModifierIndentation:
   EnforcedStyle: outdent
