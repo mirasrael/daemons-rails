@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 # encoding: UTF-8
+
 # warn_indent: true
 require 'pathname'
 require 'fileutils'
@@ -9,8 +10,8 @@ module Daemons
   module Rails
     class Configuration
       def detect_root
-        if ENV["DAEMONS_ROOT"]
-          Pathname.new(ENV["DAEMONS_ROOT"])
+        if ENV['DAEMONS_ROOT']
+          Pathname.new(ENV['DAEMONS_ROOT'])
         elsif defined?(::Rails)
           ::Rails.root
         else

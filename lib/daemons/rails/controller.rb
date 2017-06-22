@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 # encoding: UTF-8
+
 # warn_indent: true
 module Daemons
   module Rails
@@ -12,15 +13,15 @@ module Daemons
         @app_name = "#{controller_path.basename.to_s[0...-'_ctl'.length]}.rb"
       end
 
-      def run(command, argv={})
+      def run(command, argv = {})
         arguments = '-- '
-        argv.each {|key,value| arguments += "#{key}=#{value} "}
+        argv.each { |key, value| arguments += "#{key}=#{value} " }
 
         `cd "#{Daemons::Rails.configuration.root}" && "#{path}" #{command} #{arguments unless argv.empty?}`
       end
 
       def start(argv = {})
-        run('start',argv)
+        run('start', argv)
 
         status
       end
@@ -50,7 +51,7 @@ module Daemons
       end
 
       def status(argv = {})
-        run('status', argv).to_s.split("\n").last =~ /: running \[pid \d+\]$/ ? :running : :not_exists
+        run('status', argv).to_s.split("\n").last.match?(/: running \[pid \d+\]$/) ? :running : :not_exists
       end
 
       def restart?(argv = {})

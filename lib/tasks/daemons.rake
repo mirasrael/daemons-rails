@@ -1,11 +1,12 @@
 #!/usr/bin/env rake
 # frozen_string_literal: true
 # encoding: UTF-8
+
 # warn_indent: true
 require 'rake'
 
-desc "Show status of daemons"
-task :daemons => "daemons:status"
+desc 'Show status of daemons'
+task daemons: 'daemons:status'
 
 daemons_dir = Daemons::Rails.configuration.daemons_directory
 

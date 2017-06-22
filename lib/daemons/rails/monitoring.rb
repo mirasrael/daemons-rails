@@ -1,13 +1,14 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 # encoding: UTF-8
+
 # warn_indent: true
-require "daemons"
-require "pathname"
-require "forwardable"
-require "daemons/rails"
-require "daemons/rails/config"
-require "daemons/rails/controller"
+require 'daemons'
+require 'pathname'
+require 'forwardable'
+require 'daemons/rails'
+require 'daemons/rails/config'
+require 'daemons/rails/controller'
 
 module Daemons
   module Rails
@@ -16,7 +17,7 @@ module Daemons
       singleton_class.def_delegators :default, :daemons_path=, :daemons_path, :controller, :controllers, :statuses, :start, :stop
 
       def self.default
-        @default ||= self.new
+        @default ||= new
       end
 
       def initialize(daemons_path = nil)
@@ -30,12 +31,10 @@ module Daemons
 
       # @deprecate use Daemons::Rails::Monitoring#daemons_path
       def self.daemons_directory
-        self.daemons_path
+        daemons_path
       end
 
-      def daemons_path=(value)
-        @daemons_path = value
-      end
+      attr_writer :daemons_path
 
       def daemons_path
         @daemons_path || Daemons::Rails.configuration.daemons_path

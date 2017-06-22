@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 # encoding: UTF-8
+
 # warn_indent: true
 require 'yaml'
 require 'erb'
@@ -13,9 +14,9 @@ module Daemons
     class Config
       def initialize(app_name, root_path, daemons_dir = File.join('lib', 'daemons'))
         @options = {}
-        config_path = File.join(root_path, "config", "#{app_name}-daemon.yml")
-        config_path = File.join(root_path, "config", "daemons.yml") unless File.exist?(config_path)
-        options = YAML.load(ERB.new(IO.read(config_path)).result)
+        config_path = File.join(root_path, 'config', "#{app_name}-daemon.yml")
+        config_path = File.join(root_path, 'config', 'daemons.yml') unless File.exist?(config_path)
+        options = YAML.safe_load(ERB.new(IO.read(config_path)).result)
         options.each { |key, value| @options[key.to_sym] = value }
         @options[:dir_mode] = @options[:dir_mode].to_sym
         @options[:script] ||= File.join(root_path, daemons_dir, "#{app_name}.rb")
