@@ -73,7 +73,7 @@ module Daemons
         controller(app_name).restart?(argv)
       end
 
-      def controller_available?(app_name, environment})
+      def controller_available?(app_name, environment)
         controller(app_name).available?(environment)
       end
 

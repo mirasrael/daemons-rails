@@ -4,4 +4,6 @@
 # warn_indent: true
 
 require 'daemons/rails'
-Daemons::Rails.run(File.expand_path(__FILE__), ARGV.dup)
+script_path = File.expand_path(__FILE__)
+config = ::Daemons::Rails::Config.for_controller(script_path)
+Daemons::Rails.run(script_path, ARGV.dup, config)

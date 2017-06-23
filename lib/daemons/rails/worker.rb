@@ -4,16 +4,19 @@ module Daemons
     class Worker
       include Daemons::Rails::Helper
 
-      attr_accessor :controller_path, :argv, :config, :dir, :log_dir, :log_base_name
+      attr_accessor :controller_path, :argv,:options, :config, :dir, :log_dir, :log_base_name
 
-      def initialize(controller_path, argv = [])
+      def initialize(controller_path, argv = [], options = {})
         self.controller_path = File.expand_path(controller_path)
         self.argv = argv.is_a?(Array) ? argv : []
+        self.options = options.is_a?(Hash) ? options : {}
+        self.config = config.merge(@options)
       end
 
       def config
         @config||= ::Daemons::Rails::Config.for_controller(@controller_path)
-        config[:ARGV] = config[:ARGV] || argv
+        @config[:ARGV] = @config[:ARGV] || argv
+        @config
       end
 
       def run

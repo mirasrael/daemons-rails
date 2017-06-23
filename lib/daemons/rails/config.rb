@@ -31,6 +31,11 @@ module Daemons
       def to_hash
         @options
       end
+
+      def merge(data = {})
+        data = data.is_a?(Hash) ? data : {}
+        @options = @options.merge(data)
+      end
     end
   end
 end

@@ -17,8 +17,8 @@ module Daemons
       yield configuration
     end
 
-    def self.run(controller_path, argv = [])
-      Daemons::Rails::Worker.new(controller_path, argv).run
+    def self.run(controller_path, argv = [], options = {})
+      Daemons::Rails::Worker.new(controller_path, argv, options).run
     end
 
   end
