@@ -50,3 +50,23 @@ if RUBY_VERSION >= '2.2.0'
     gem 'rails-controller-testing'
   end
 end
+
+
+appraise 'rails-5.1.1-daemons-1.0.0' do
+  gem 'rails', '5.1.1'
+  gem 'rails-controller-testing'
+  gem 'daemons', '1.0.0'
+end
+
+
+appraise 'rails-5.1.1-daemons-1.1.0' do
+  gem 'rails', '5.1.1'
+  gem 'rails-controller-testing'
+  gem 'daemons', '1.1.0'
+end
+
+appraise 'rails-5.1.1-daemons-1.2.0' do
+  gem 'rails', '5.1.1'
+  gem 'rails-controller-testing'
+  gem 'daemons', '1.2.4'
+end
