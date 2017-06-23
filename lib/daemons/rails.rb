@@ -4,7 +4,7 @@
 
 # warn_indent: true
 
-require "daemons/rails/all"
+require 'daemons/rails/all'
 
 module Daemons
   module Rails
@@ -20,6 +20,5 @@ module Daemons
     def self.run(*args)
       ::Daemons::Rails::Worker.new(*args).run
     end
-
   end
 end

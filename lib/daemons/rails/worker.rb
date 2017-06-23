@@ -1,9 +1,10 @@
-require_relative "./config"
+# frozen_string_literal: true
+
+require_relative './config'
 module Daemons
   module Rails
     class Worker
-
-      attr_accessor :controller_path, :argv,:options, :config, :dir, :log_dir, :log_base_name
+      attr_accessor :controller_path, :argv, :options, :config, :dir, :log_dir, :log_base_name
 
       def initialize(controller_path, options = {})
         self.controller_path = File.expand_path(controller_path)
@@ -13,7 +14,7 @@ module Daemons
       end
 
       def config
-        @config||= ::Daemons::Rails::Config.for_controller(@controller_path)
+        @config ||= ::Daemons::Rails::Config.for_controller(@controller_path)
         @config[:ARGV] = @config[:ARGV] || argv
         @config
       end
@@ -26,20 +27,19 @@ module Daemons
         start_work
       end
 
-      private
+    private
 
       def check_directory_given
         if config[:dir].blank?
-          raise "Please make sure you have the :dir option set in your configuration file"
+          raise 'Please make sure you have the :dir option set in your configuration file'
         else
           self.dir = ::Daemons::Pid.dir(config[:dir_mode], config[:dir], @controller_path)
         end
       end
 
-
       def check_logging_enabled
-        return if config[:log_dir].blank? || config[:log_output].to_s != "true"
-        config_logdir = config[:log_dir] or config[:dir_mode] == :system ? '/var/log' : @dir
+        return if config[:log_dir].blank? || config[:log_output].to_s != 'true'
+        (config_logdir = config[:log_dir]) || config[:dir_mode] == :system ? '/var/log' : @dir
         self.log_dir = config[:log_dir] = File.expand_path(config_logdir)
       end
 
@@ -62,14 +62,13 @@ module Daemons
 
       def can_work?
         config[:available_environments].is_a?(Array) &&
-        config[:available_environments].include?(ENV["RAILS_ENV"])
+          config[:available_environments].include?(ENV['RAILS_ENV'])
       end
 
       def start_work
         return unless can_work?
         ::Daemons.run(config[:script], config.to_hash)
       end
-
     end
   end
 end

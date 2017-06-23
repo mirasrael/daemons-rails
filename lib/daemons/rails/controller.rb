@@ -53,11 +53,11 @@ module Daemons
         run('start', argv) if restart?(argv)
       end
 
-      private
+    private
 
       def prepare_argv_for_running(argv = {})
         argv = argv.is_a?(Hash) ? argv : {}
-        argv = {:RAILS_ENV => ENV["RAILS_ENV"]}.merge(argv)
+        argv = { RAILS_ENV: ENV['RAILS_ENV'] }.merge(argv)
         argv
       end
     end
