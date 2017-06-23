@@ -3,6 +3,7 @@
 # encoding: UTF-8
 
 # warn_indent: true
+require_relative "./controller"
 module Daemons
   module Rails
     class Monitoring

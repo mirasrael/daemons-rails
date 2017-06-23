@@ -1,3 +1,4 @@
+require_relative "./config"
 module Daemons
   module Rails
     class Worker
