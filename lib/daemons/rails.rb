@@ -3,8 +3,8 @@
 # encoding: UTF-8
 
 # warn_indent: true
-require 'daemons'
-require 'daemons/rails/configuration'
+
+require "daemons/rails/all"
 
 module Daemons
   module Rails
@@ -17,8 +17,9 @@ module Daemons
       yield configuration
     end
 
-    def self.run(*args)
-      Daemons.run(*args)
+    def self.run(controller_path, argv = [])
+      Daemons::Rails::Worker.new(controller_path, argv).run
     end
+
   end
 end

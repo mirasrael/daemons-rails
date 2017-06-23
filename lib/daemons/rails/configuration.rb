@@ -3,9 +3,6 @@
 # encoding: UTF-8
 
 # warn_indent: true
-require 'pathname'
-require 'fileutils'
-
 module Daemons
   module Rails
     class Configuration

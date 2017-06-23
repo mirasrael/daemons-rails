@@ -3,12 +3,6 @@
 # encoding: UTF-8
 
 # warn_indent: true
-require 'yaml'
-require 'erb'
-require 'pathname'
-
-require 'daemons/rails'
-
 module Daemons
   module Rails
     class Config
@@ -22,7 +16,7 @@ module Daemons
         @options[:script] ||= File.join(root_path, daemons_dir, "#{app_name}.rb")
       end
 
-      def self.for_controller(controller_path, root = Daemons::Rails.configuration.root)
+      def self.for_controller(controller_path, root = ::Daemons::Rails.configuration.root)
         new(File.basename(controller_path, '_ctl'), root, Pathname.new(controller_path).parent.relative_path_from(root))
       end
 

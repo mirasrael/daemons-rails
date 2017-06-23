@@ -6,6 +6,8 @@
 
 # You might want to change this
 ENV['RAILS_ENV'] ||= 'production'
+require 'rubygems'
+require 'daemons/rails'
 
 root = File.expand_path(File.dirname(__FILE__))
 root = File.dirname(root) until File.exist?(File.join(root, 'config'))
@@ -17,10 +19,6 @@ $running = true
 $reload = false
 Signal.trap('TERM') do
   $running = false
-end
-
-Signal.trap('SIGHUP') do
-  $reload = true
 end
 
 $stdin.sync = true if $stdin.isatty

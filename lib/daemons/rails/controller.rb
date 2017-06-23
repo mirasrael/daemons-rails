@@ -15,39 +15,29 @@ module Daemons
 
       def run(command, argv = {})
         arguments = '-- '
+        argv = prepare_argv_for_running(argv)
         argv.each { |key, value| arguments += "#{key}=#{value} " }
-
-        `cd "#{Daemons::Rails.configuration.root}" && "#{path}" #{command} #{arguments unless argv.empty?}`
+        `cd "#{::Daemons::Rails.configuration.root}" && "#{path}" #{command} #{arguments unless argv.empty?}`
       end
 
       def start(argv = {})
         run('start', argv)
-
-      #  status
       end
 
       def stop(argv = {})
         run('stop', argv)
-
-      #  status
       end
 
       def reload(argv = {})
         run('reload', argv)
-
-      #  status
       end
 
       def zap(argv = {})
         run('zap', argv)
-
-      #  status
       end
 
       def restart(argv = {})
         run('restart', argv)
-
-      #  status
       end
 
       def status(argv = {})
@@ -63,10 +53,18 @@ module Daemons
       end
 
       def available?(environment)
-        daemons_config = Daemons::Rails::Config.for_controller(@path)
+        daemons_config = ::Daemons::Rails::Config.for_controller(@path)
         daemons_config &&
           daemons_config['available_environments'] &&
           daemons_config['available_environments'].include?(environment)
+      end
+
+      private
+
+      def prepare_argv_for_running(argv = {})
+        argv = {} unless argv.is_a?(Hash)
+        argv = {'RAILS_ENV' => ENV["RAILS_ENV"]}.merge(argv)
+        argv
       end
     end
   end

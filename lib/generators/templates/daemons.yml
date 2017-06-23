@@ -1,7 +1,7 @@
 dir_mode: script
 mode: exec
-dir: ../../log/pids
-logdir: ../../log
+dir: ..
+log_dir: ../log
 shush: false
 multiple: false
 backtrace: true
@@ -10,7 +10,7 @@ monitor_interval: 60 # seconds
 ontop: false
 log_output: true
 keep_pid_files: true
-no_pidfiles: false
+no_pidfiles:  # left blank intentionally so that pids are not in memory
 force_kill_waittime: 60
 available_environments:
   - development
