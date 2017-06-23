@@ -39,8 +39,8 @@ module Daemons
 
       def check_logging_enabled
         return if config[:log_dir].blank? || config[:log_output].to_s != 'true'
-        (config_logdir = config[:log_dir]) || config[:dir_mode] == :system ? '/var/log' : @dir
-        self.log_dir = config[:log_dir] = File.expand_path(config_logdir)
+        config_logdir = config[:log_dir] || (config[:dir_mode] == :system ? '/var/log' : @dir)
+        self.log_dir = config[:log_dir] = ::Daemons::Pid.dir(config[:dir_mode], config[:log_dir], @controller_path)
       end
 
       def prepare_logging_if_needed

@@ -29,3 +29,6 @@ tags
 /.git-rewrite/
 bin/
 gemfiles/*.lock
+*.pid
+*.rb.txt
+*.rb.log

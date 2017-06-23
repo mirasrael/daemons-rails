@@ -1,7 +1,7 @@
 dir_mode: script
 mode: exec
-dir: ..
-log_dir: ../log
+dir: ../../log
+log_dir: ../../log
 shush: false
 multiple: false
 backtrace: true
