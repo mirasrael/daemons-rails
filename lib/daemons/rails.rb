@@ -10,7 +10,7 @@ module Daemons
   module Rails
     # @return [Daemons::Rails::Configuration]
     def self.configuration
-      @configuration ||= Daemons::Rails::Configuration.new
+      @configuration ||= ::Daemons::Rails::Configuration.new
     end
 
     def self.configure
@@ -18,7 +18,7 @@ module Daemons
     end
 
     def self.run(*args)
-      Daemons::Rails::Worker.new(*args).run
+      ::Daemons::Rails::Worker.new(*args).run
     end
 
   end

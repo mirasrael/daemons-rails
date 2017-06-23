@@ -17,6 +17,7 @@ module Daemons
         arguments = '-- '
         argv = prepare_argv_for_running(argv)
         argv.each { |key, value| arguments += "#{key}=#{value} " }
+
         `cd "#{::Daemons::Rails.configuration.root}" && "#{path}" #{command} #{arguments unless argv.empty?}`
       end
 
@@ -52,18 +53,11 @@ module Daemons
         run('start', argv) if restart?(argv)
       end
 
-      def available?(environment)
-        daemons_config = ::Daemons::Rails::Config.for_controller(@path)
-        daemons_config &&
-          daemons_config['available_environments'] &&
-          daemons_config['available_environments'].include?(environment)
-      end
-
       private
 
       def prepare_argv_for_running(argv = {})
-        argv = {} unless argv.is_a?(Hash)
-        argv = {'RAILS_ENV' => ENV["RAILS_ENV"]}.merge(argv)
+        argv = argv.is_a?(Hash) ? argv : {}
+        argv = {:RAILS_ENV => ENV["RAILS_ENV"]}.merge(argv)
         argv
       end
     end

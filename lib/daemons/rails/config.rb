@@ -7,7 +7,7 @@ module Daemons
   module Rails
     class Config
       def initialize(app_name, root_path, daemons_dir = File.join('lib', 'daemons'))
-        @options = {}
+        @options = {}.with_indifferent_access
         config_path = File.join(root_path, 'config', "#{app_name}-daemon.yml")
         config_path = File.join(root_path, 'config', 'daemons.yml') unless File.exist?(config_path)
         options = YAML.safe_load(ERB.new(IO.read(config_path)).result)

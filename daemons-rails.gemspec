@@ -28,6 +28,8 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'daemons'
   gem.add_dependency 'multi_json', '~>1.0'
+  gem.add_runtime_dependency 'activesupport', '>= 4.0', '>= 4.0'
+
 
   gem.add_development_dependency "rake"
   gem.add_development_dependency 'rspec-rails', '~> 3.5', '>= 3.5'

@@ -1,8 +1,6 @@
-require_relative "./helper.rb"
 module Daemons
   module Rails
     class Worker
-      include Daemons::Rails::Helper
 
       attr_accessor :controller_path, :argv,:options, :config, :dir, :log_dir, :log_base_name
 
@@ -30,7 +28,7 @@ module Daemons
       private
 
       def check_directory_given
-        if string_blank?(config[:dir])
+        if config[:dir].blank?
           raise "Please make sure you have the :dir option set in your configuration file"
         else
           self.dir = ::Daemons::Pid.dir(config[:dir_mode], config[:dir], @controller_path)
@@ -39,13 +37,13 @@ module Daemons
 
 
       def check_logging_enabled
-        return if string_blank?(config[:log_dir]) || config[:log_output].to_s != "true"
+        return if config[:log_dir].blank? || config[:log_output].to_s != "true"
         config_logdir = config[:log_dir] or config[:dir_mode] == :system ? '/var/log' : @dir
         self.log_dir = config[:log_dir] = File.expand_path(config_logdir)
       end
 
       def prepare_logging_if_needed
-        return if string_blank?(@log_dir)
+        return if @log_dir.blank?
 
         config[:output_logfilename] = config[:output_logfilename] || "#{File.basename(@controller_path)}.rb.txt"
         config[:logfilename] = config[:logfilename] || "#{File.basename(@controller_path)}.rb.log"
@@ -61,7 +59,13 @@ module Daemons
         end
       end
 
+      def can_work?
+        config[:available_environments].is_a?(Array) &&
+        config[:available_environments].include?(ENV["RAILS_ENV"])
+      end
+
       def start_work
+        return unless can_work?
         ::Daemons.run(config[:script], config.to_hash)
       end
 
