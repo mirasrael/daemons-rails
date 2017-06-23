@@ -3,7 +3,8 @@
 # encoding: UTF-8
 # warn_indent: true
 
+require 'rubygems'
 require 'daemons/rails'
-script_path = File.expand_path(__FILE__)
-config = ::Daemons::Rails::Config.for_controller(script_path)
-Daemons::Rails.run(script_path, ARGV.dup, config)
+
+config = Daemons::Rails::Config.for_controller(File.expand_path(__FILE__))
+Daemons::Rails.run config[:script], config.to_hash

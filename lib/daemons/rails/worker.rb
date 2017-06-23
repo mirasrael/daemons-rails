@@ -6,10 +6,10 @@ module Daemons
 
       attr_accessor :controller_path, :argv,:options, :config, :dir, :log_dir, :log_base_name
 
-      def initialize(controller_path, argv = [], options = {})
+      def initialize(controller_path, options = {})
         self.controller_path = File.expand_path(controller_path)
-        self.argv = argv.is_a?(Array) ? argv : []
         self.options = options.is_a?(Hash) ? options : {}
+        self.argv = ARGV.dup
         self.config = config.merge(@options)
       end
 
