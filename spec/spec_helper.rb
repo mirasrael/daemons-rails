@@ -1,28 +1,27 @@
 # Configure Rails Envinronment
-# Configure Rails Envinronment
-ENV['RAILS_ENV'] = 'test'
+ENV["RAILS_ENV"] ||= 'test'
 require 'bundler/setup'
 require 'simplecov'
 require 'simplecov-summary'
-require File.expand_path('../dummy/config/environment.rb', __FILE__)
-require 'rspec/rails'
-require 'daemons-rails'
-# require "codeclimate-test-reporter"
-formatters = [SimpleCov::Formatter::SummaryFormatter,SimpleCov::Formatter::HTMLFormatter]
-# formatters << CodeClimate::TestReporter::Formatter # if ENV['CODECLIMATE_REPO_TOKEN'] && ENV['TRAVIS']
+require 'coveralls'
+Coveralls.wear!
+formatters = [
+  SimpleCov::Formatter::SummaryFormatter,
+  SimpleCov::Formatter::HTMLFormatter,
+  Coveralls::SimpleCov::Formatter,
+]
 
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new(formatters)
-SimpleCov.start :rails do
-  add_filter 'rails'
+SimpleCov.start 'rails' do
    at_exit do
      SimpleCov.result.format!
    end
- end
+end
 
-# CodeClimate::TestReporter.configure do |config|
-#  config.logger.level = Logger::WARN
-# end
-# CodeClimate::TestReporter.start
+require File.expand_path('../dummy/config/environment.rb', __FILE__)
+require 'rspec/rails'
+require 'daemons-rails'
+
 
 Rails.backtrace_cleaner.remove_silencers!
 
@@ -37,8 +36,5 @@ RSpec.configure do |config|
 
   config.mock_with :rspec
   config.infer_spec_type_from_file_location!
- #  config.after(:suite) do
- #    SimpleCov.result.format! if SimpleCov.running
- # end
 
 end

@@ -34,6 +34,7 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'rspec-rails', '~> 3.5', '>= 3.5'
 
   gem.add_development_dependency 'appraisal', '~> 2.1', '>= 2.1'
+  gem.add_development_dependency 'coveralls','~> 0.8', '>= 0.8'
   gem.add_development_dependency 'simplecov', '~> 0.12', '>= 0.12'
   gem.add_development_dependency 'simplecov-summary', '~> 0.0.5', '>= 0.0.5'
   gem.add_development_dependency 'yard', '~> 0.8', '>= 0.8.7'

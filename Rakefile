@@ -3,7 +3,9 @@ require 'bundler/setup'
 require 'bundler/gem_tasks'
 require 'appraisal'
 require 'rspec/core/rake_task'
+require 'coveralls/rake/task'
 require 'yard'
+Coveralls::RakeTask.new
 
 RSpec::Core::RakeTask.new(:spec) do |spec|
   default_options = ['--colour']

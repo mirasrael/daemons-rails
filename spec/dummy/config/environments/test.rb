@@ -10,6 +10,12 @@ Dummy::Application.configure do
   # Do not eager load code on boot. This avoids loading your whole application
   # just for the purpose of running a single test. If you are using a tool that
   # preloads Rails for running tests, you may have to set it to true.
+  if config.respond_to?(:public_file_server)
+      config.public_file_server.enabled = false
+  elsif config.respond_to?(:serve_static_files)
+      config.serve_static_files = false
+  end
+  
   config.eager_load = true
 
   # Show full error reports and disable caching

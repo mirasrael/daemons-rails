@@ -8,6 +8,12 @@ Dummy::Application.configure do
   # Do not eager load code on boot.
   config.eager_load = false
 
+  if config.respond_to?(:public_file_server)
+      config.public_file_server.enabled = false
+  elsif config.respond_to?(:serve_static_files)
+      config.serve_static_files = false
+  end
+  
   # Log error messages when you accidentally call methods on nil.
   config.whiny_nils = true
 
