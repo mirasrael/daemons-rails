@@ -1,4 +1,6 @@
-# NOTE: The project is not currently under support and looking for man who ready to get care of it
+# NOTE: DON'T USE THIS FORK . This is still work in progress!!!!!
+
+# NOTE: The [original project](https://github.com/mirasrael/daemons-rails) is not currently under support and looking for man who ready to get care of it
 
 Daemons Rails support (based on http://github.com/dougal/daemon_generator)
 ================
