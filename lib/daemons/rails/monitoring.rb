@@ -3,6 +3,7 @@
 # encoding: UTF-8
 
 # warn_indent: true
+require_relative './core'
 require_relative './controller'
 module Daemons
   module Rails
@@ -35,7 +36,7 @@ module Daemons
       end
 
       def controller(app_name)
-        controllers.find { |controller| controller.app_name == app_name }
+        controllers.find { |controller| controller if controller.app_name == app_name }
       end
 
       def controllers

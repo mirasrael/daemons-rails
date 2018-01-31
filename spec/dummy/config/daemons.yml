@@ -1,4 +1,4 @@
-dir_mode: script
+dir_mode: normal
 mode: exec
 dir: ../../log
 log_dir: ../../log

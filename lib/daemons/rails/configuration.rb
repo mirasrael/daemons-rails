@@ -3,41 +3,47 @@
 # encoding: UTF-8
 
 # warn_indent: true
+
+require_relative './configuration_helper'
 module Daemons
   module Rails
     class Configuration
+      include Daemons::Rails::ConfigurationHelper
+
       def detect_root
         if ENV['DAEMONS_ROOT']
           Pathname.new(ENV['DAEMONS_ROOT'])
         elsif defined?(::Rails)
           ::Rails.root
         else
-          root = Pathname.new(FileUtils.pwd)
-          root = root.parent unless root.directory?
-          root = root.parent until File.exist?(root.join('config.ru')) || root.root?
-          raise "Can't detect Rails application root" if root.root?
+          root = try_detect_file
+          fail_rails_not_found(root)
           root
         end
+      end
+
+      def detect_bundle_gemfile
+        try_detect_file('Gemfile')
       end
 
       def daemons_path=(path)
         @daemons_path = path && (path.is_a?(Pathname) ? path : Pathname.new(File.expand_path(path)))
       end
 
-      def root=(path)
+      def app_root=(path)
         @root = path && (path.is_a?(Pathname) ? path : Pathname.new(File.expand_path(path)))
       end
 
-      def root
-        @root ||= detect_root
+      def app_root
+        @root || detect_root
       end
 
       def daemons_path
-        @daemons_path || root.join('lib', 'daemons')
+        @daemons_path || app_root.join('lib', 'daemons')
       end
 
       def daemons_directory
-        daemons_path.relative_path_from(root)
+        daemons_path.relative_path_from(app_root)
       end
     end
   end

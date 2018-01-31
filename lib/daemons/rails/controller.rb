@@ -3,6 +3,8 @@
 # encoding: UTF-8
 
 # warn_indent: true
+require_relative './core'
+require_relative './controller_command'
 module Daemons
   module Rails
     class Controller
@@ -16,9 +18,10 @@ module Daemons
       def run(command, argv = {})
         arguments = '-- '
         argv = prepare_argv_for_running(argv)
-        argv.each { |key, value| arguments += "#{key}=#{value} " }
-
-        `cd "#{::Daemons::Rails.configuration.root}" && "#{path}" #{command} #{arguments unless argv.empty?}`
+        argv.each { |key, value| arguments += "--#{key}=#{value} " }
+        daemon_script = "bundle exec ruby #{path} #{command} #{arguments unless argv.empty?}"
+        runner = ::Daemons::Rails::ControllerCommand.new(self)
+        runner.execute(daemon_script)
       end
 
       def start(argv = {})
@@ -42,7 +45,9 @@ module Daemons
       end
 
       def status(argv = {})
-        run('status', argv).to_s.split("\n").last.match?(/: running \[pid \d+\]$/) ? :running : :not_exists
+        status = run('status', argv).to_s.chomp
+        match_data = status =~ /running\s+\[pid\s+\d+\]/
+        match_data ? :running : :not_exists
       end
 
       def restart?(argv = {})
@@ -53,11 +58,15 @@ module Daemons
         run('start', argv) if restart?(argv)
       end
 
-    private
+      private
+
+      def default_env
+        (::ENV['RAILS_ENV'] || ::ENV['RACK_ENV'] || ::ENV['APP_ENV'] || 'development').to_s
+      end
 
       def prepare_argv_for_running(argv = {})
         argv = argv.is_a?(Hash) ? argv : {}
-        argv = { RAILS_ENV: ENV['RAILS_ENV'] }.merge(argv)
+        argv = { RAILS_ENV: default_env }.merge(argv)
         argv
       end
     end

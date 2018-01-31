@@ -5,7 +5,7 @@
 # warn_indent: true
 
 # You might want to change this
-ENV['RAILS_ENV'] ||= 'production'
+ENV['RAILS_ENV'] ||= 'test'
 
 root = File.expand_path(File.dirname(__FILE__))
 root = File.dirname(root) until File.exist?(File.join(root, 'config'))
@@ -27,7 +27,7 @@ Rails.logger.auto_flushing = true if Rails.logger.respond_to?(:auto_flushing)
 
 while $running
   # Replace this with your code
-  Rails.logger.info "This daemon is still running at #{Time.now} -- #{ENV['RAILS_ENV']} -- #{ENV['RACK_ENV']} -- #{Rails.env}.\n"
+  Rails.logger.info "This daemon 'test.rb' #{$PROCESS_ID} is still running at #{Time.now} -- #{ENV['RAILS_ENV']} -- #{ENV['RACK_ENV']} -- #{ENV['APP_ENV']} -- #{Rails.env}.\n"
 
   sleep 10
 end

@@ -3,6 +3,8 @@ require File.expand_path('../boot', __FILE__)
 ENV['RAILS_ENV'] ||= 'test'
 
 require 'action_controller/railtie'
+require 'active_support/railtie'
+require 'active_support/i18n_railtie'
 require 'rails/test_unit/railtie'
 
 if Rails::VERSION::MAJOR >= 4
@@ -16,7 +18,6 @@ end
 
 
 Bundler.require
-
 
 #require 'rails/all'
 # Require the gems listed in Gemfile, including any gems
