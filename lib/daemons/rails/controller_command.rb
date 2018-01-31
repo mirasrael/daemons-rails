@@ -53,13 +53,6 @@ module Daemons
         rvm_bin_path.present?
       end
 
-      def create_tempfile_command(output)
-        @tempfile = Tempfile.new(%W(daemon-#{command_id}_command_ .rb), encoding: 'utf-8')
-        @tempfile.write(output)
-        ObjectSpace.undefine_finalizer(@tempfile) # force garbage collector not to remove automatically the file
-        @tempfile.close
-      end
-
       def rvm_scripts_path
         File.join(File.dirname(File.dirname(rvm_bin_path)), 'scripts', 'rvm')
       end
