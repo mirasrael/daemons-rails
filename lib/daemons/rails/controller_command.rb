@@ -27,11 +27,7 @@ module Daemons
       end
 
       private
-
-      def command_id
-        @command_id ||= options.fetch(:id, SecureRandom.uuid)
-      end
-
+      
       def get_command_script(command)
         command = rvm_bash_prefix(command)
         `#{command}`
