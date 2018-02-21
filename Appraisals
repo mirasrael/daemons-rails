@@ -25,16 +25,6 @@ if RUBY_VERSION >= '2.2.0'
     gem 'rails-controller-testing'
   end
 
-  appraise 'rails-5.1.0.rc1' do
-    gem 'rails', '5.1.0.rc1'
-    gem 'rails-controller-testing'
-  end
-
-  appraise 'rails-5.1.0.rc2' do
-    gem 'rails', '5.1.0.rc2'
-    gem 'rails-controller-testing'
-  end
-
   appraise 'rails-5.1.0' do
     gem 'rails', '5.1.0'
     gem 'rails-controller-testing'
@@ -45,8 +35,8 @@ if RUBY_VERSION >= '2.2.0'
     gem 'rails-controller-testing'
   end
 
-  appraise 'rails-5.1.2.rc1' do
-    gem 'rails', '5.1.2.rc1'
+  appraise 'rails-5.1.2' do
+    gem 'rails', '5.1.2'
     gem 'rails-controller-testing'
   end
 end
@@ -67,4 +57,16 @@ appraise 'rails-5.1.1-daemons-1.2.0' do
   gem 'rails', '5.1.1'
   gem 'rails-controller-testing'
   gem 'daemons', '1.2.4'
+end
+
+appraise 'rails-5.1.5-daemons-1.2.6' do
+  gem 'rails', '5.1.5'
+  gem 'rails-controller-testing'
+  gem 'daemons', '1.2.6'
+end
+
+appraise 'rails-5.2.0.rc1-daemons-1.2.6' do
+  gem 'rails', '5.2.0.rc1'
+  gem 'rails-controller-testing'
+  gem 'daemons', '1.2.6'
 end
